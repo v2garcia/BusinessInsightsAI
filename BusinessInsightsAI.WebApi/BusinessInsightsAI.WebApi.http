@@ -1,0 +1,6 @@
+@BusinessInsightsAI.WebApi_HostAddress = http://localhost:5160
+
+GET {{BusinessInsightsAI.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
