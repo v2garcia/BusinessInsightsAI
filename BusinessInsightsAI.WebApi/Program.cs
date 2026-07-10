@@ -24,6 +24,8 @@ builder.Services.AddDbContext<ApplicationDbContext>((ServiceProvider, options) =
 });
 
 
+builder.Services.AddScoped<ISalesAnalyticsService, SalesAnalyticsService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

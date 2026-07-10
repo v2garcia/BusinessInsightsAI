@@ -1,3 +1,4 @@
+using Azure.Core.Pipeline;
 using BusinessInsightsAI.Application.Common.Interfaces;
 using BusinessInsightsAI.Domain.Common;
 using BusinessInsightsAI.Domain.Entities;
@@ -17,6 +18,11 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<Tenant> Tenants => Set<Tenant>();
+    public DbSet<Customer> Customers => Set<Customer>();
+    public DbSet<Product> Products => Set<Product>();
+    public DbSet<Invoice>  Invoices => Set<Invoice>();
+    public DbSet<InvoiceLine> InvoiceLines => Set<InvoiceLine>();
+    
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -27,6 +33,13 @@ public class ApplicationDbContext : DbContext
             entity.HasKey(t => t.Id);
             entity.Property(t => t.Name).IsRequired().HasMaxLength(100);
         });
+        modelBuilder.Entity<Product>(entity => entity.Property(p => p.Price).HasPrecision(18, 2));
+        modelBuilder.Entity<Product>(entity => entity.Property(p => p.Cost).HasPrecision(18, 2));
+        modelBuilder.Entity<Invoice>(entity => entity.Property(i => i.TotalAmount).HasPrecision(18, 2));
+        modelBuilder.Entity<Invoice>(entity => entity.Property(i => i.TotalTax).HasPrecision(18, 2));
+        modelBuilder.Entity<InvoiceLine>(entity => entity.Property(l => l.UnitPrice).HasPrecision(18, 2));
+        modelBuilder.Entity<InvoiceLine>(entity => entity.Property(l => l.Discount).HasPrecision(18, 2));
+        
 
         foreach (var entityType in modelBuilder.Model.GetEntityTypes())
         {
