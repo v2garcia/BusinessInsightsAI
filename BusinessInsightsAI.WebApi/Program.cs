@@ -26,6 +26,9 @@ builder.Services.AddDbContext<ApplicationDbContext>((ServiceProvider, options) =
 
 
 builder.Services.AddScoped<ISalesAnalyticsService, SalesAnalyticsService>();
+builder.Services.AddScoped<IAIService, OpenAIService>();
+builder.Services.AddScoped<IInsightOrchestrator, InsightOrchestrator>();
+
 
 //SeriLog
 Log.Logger = new LoggerConfiguration()
