@@ -13,6 +13,16 @@ services:
       - MSSQL_PID=Developer
     volumes:
       - mssql_data:/var/opt/mssql
+    
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: business_insights_queue
+    ports:
+      - "5672:5672"   # Puerto de mensajería (AMQP)
+      - "15672:15672" # Puerto del Panel de Control Web
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guestdocker compose up -d
 
 volumes:
   mssql_data:

@@ -3,6 +3,7 @@ using BusinessInsightsAI.Infrastructure.Persistence;
 using BusinessInsightsAI.Infrastructure.Services;
 using BusinessInsightsAI.WebApi.Middlewares;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,15 @@ builder.Services.AddDbContext<ApplicationDbContext>((ServiceProvider, options) =
 
 builder.Services.AddScoped<ISalesAnalyticsService, SalesAnalyticsService>();
 
+//SeriLog
+Log.Logger = new LoggerConfiguration()
+    .Enrich.FromLogContext()
+    .Enrich.WithProperty("Application", "BusinessInsightsAI.WebApi")
+    .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] [{CorrelationId}] {Message:lj}{NewLine}{Exception}")
+    .CreateLogger();
+
+builder.Host.UseSerilog();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -37,7 +47,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+
 //agregando el middleware
+app.UseMiddleware<CorrelationIdMiddleware>();
 app.UseMiddleware<TenantMiddleware>();
 
 app.UseAuthorization();
