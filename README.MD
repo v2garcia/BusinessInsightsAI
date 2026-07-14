@@ -22,9 +22,9 @@ graph TD
     API -->|7. Execute Ultra-Fast passing @TenantId| Dapper[Dapper Core Engine]
     Dapper -->|Query Filtered Data| DB
 
+```
 
-
-🚀 Quick Start (Local Production Simulation)
+## 🚀 Quick Start (Local Production Simulation)
 You can run the entire infrastructure, including the database and message broker, locally with a single command:
 Bash
 docker compose up --build -d
@@ -33,7 +33,7 @@ SQL Server: localhost,1433
 RabbitMQ Management Portal: http://localhost:15672 (Credentials: guest / guest)
 Swagger API Documentation: http://localhost:<port>/swagger
 
-🧠 Key Senior Highlights Demonstrated
+## 🧠 Key Senior Highlights Demonstrated
 Zero Data Leakage: Built-in dynamic Global Query Filters applied at the EF Core level block multi-tenant injection attacks natively.
 Hybrid Performance: Leverages Entity Framework Core for operational CRUD safety and Dapper for heavy-duty, schema-isolated Text-to-SQL execution.
 Distributed Observability: Implements full structured telemetry passing an invariant CorrelationId across HTTP requests and message consumers via Serilog.
