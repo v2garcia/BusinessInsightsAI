@@ -22,6 +22,8 @@ graph TD
     API -->|7. Execute Ultra-Fast passing @TenantId| Dapper[Dapper Core Engine]
     Dapper -->|Query Filtered Data| DB
 
+
+
 🚀 Quick Start (Local Production Simulation)
 You can run the entire infrastructure, including the database and message broker, locally with a single command:
 Bash
